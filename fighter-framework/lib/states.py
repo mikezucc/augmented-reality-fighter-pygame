@@ -162,13 +162,11 @@ class StateDriver(object):
         clock = pygame.time.Clock()
 
         while currentState:
+            # this is to make sure frames are not written over each other, essentially just a ready wait
             if not isDisplayed:
                 renderedSurface = pygame.display.get_surface()
                 threadPerspectiveRenderNew = threadPerspectiveRender(1, renderedSurface)
                 threadPerspectiveRenderNew.start()
-                #justTransform(renderedSurface)
-                #pygame.image.save(renderedSurface, randImgName + '.jpeg')
-                #gfx.update_display()
             clock.tick(40)
 
             event = event_poll()
@@ -194,28 +192,20 @@ class StateDriver(object):
                 currentState = current_state()
                 gfx.update_display()
 
+# Code written by Michael Zuccarino, this really all it is
 def transformTheSurface(inputFrame):
     ret, frameLeft = capleft.read()
     capGray = cv2.cvtColor(frameLeft,cv2.COLOR_BGR2GRAY)
     found, corners = cv2.findChessboardCorners(capGray, (5,4)) #,None,cv2.CALIB_CB_FAST_CHECK)
     if (found):
         npGameFrame = pygame.surfarray.array3d(inputFrame)
-        #npGameFrame = cv2.flip(npGameFrame, 0)
-        #inputFrameGray = cv2.cvtColor(npGameFrame,cv2.COLOR_BGR2GRAY)
-        #corners2 = cv2.cornerSubPix(inputFrameGray,corners,(7,7),(-1,-1),criteria)
         cv2.drawChessboardCorners(frameLeft, (5,4), corners, found)
         q = corners[[0, 4, 15, 19]]
         ret, rvecCalc, tvecs = cv2.solvePnP(objp, corners, loadedCalibFileMTX, loadedCalibFileDIST)
         from3dTransMatrix, jac = cv2.projectPoints(muffinFrameBase, rvecCalc, tvecs, loadedCalibFileMTX, loadedCalibFileDIST)
-        #print from3dTransMatrix
-        #rvecs[:3,:3] = rvecCalc
-        #rodRotMat = cv2.Rodrigues(rvecCalc)
-        #rvecs[:3,:3] = rodRotMat[0]
         ptMatrix = cv2.getPerspectiveTransform( muffinCoords, from3dTransMatrix)
-        #rvecsExpanded = rvecs.resize(4,4)
-        #print ptMatrix
-        #npGameFrameRemap = cv2.remap(npGameFrame, ptMatrix, None, cv2.INTER_LINEAR)
-        print q
+
+        #draw on some reference points to make it clear
         cv2.circle(frameLeft, (from3dTransMatrix[0][0][0],from3dTransMatrix[0][0][1]), 5, (255,0,0), -1, cv2.LINE_AA)
         cv2.circle(frameLeft, (from3dTransMatrix[1][0][0],from3dTransMatrix[1][0][1]), 5, (255,0,0), -1, cv2.LINE_AA)
         cv2.circle(frameLeft, (from3dTransMatrix[2][0][0],from3dTransMatrix[2][0][1]), 5, (255,0,0), -1, cv2.LINE_AA)
@@ -224,57 +214,17 @@ def transformTheSurface(inputFrame):
         cv2.circle(frameLeft, (q[1][0][0],q[1][0][1]), 5, (0,255,0), -1, cv2.LINE_AA)
         cv2.circle(frameLeft, (q[2][0][0],q[2][0][1]), 5, (0,255,0), -1, cv2.LINE_AA)
         cv2.circle(frameLeft, (q[3][0][0],q[3][0][1]), 5, (0,255,0), -1, cv2.LINE_AA)
-        #T[0,3] = tvecs[0]
-        #T[1,3] = tvecs[1]
-        #T[2,3] = tvecs[2]
 
-        #ptMatrixflip = np.flipud(ptMatrix)
-        
-
-        # derive own rotation matrix
-        # METHOD 1 constant angles
-        #XRotMat = np.matrix([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
-        #xRotVect = np.array([3, 0, 0], dtype=np.float)
-        #xRotMatRod = cv2.Rodrigues(xRotVect)
-        #ptMatrixWithXRot = ptMatrix * xRotMatRod[0]
-        
-        #ptMatrixWithXRot = ptMatrix * rodRotMat[0]
-        #inputFrameConv = cv2.cvtColor(npGameFrame,cv2.COLOR_BGRA2GRAY)
-
-        # CREATING CUSTOM TRANSFORM MATRIX
-        # A1 -> 2d to 3d projection matrix http://jepsonsblog.blogspot.in/2012/11/rotation-in-3d-using-opencvs.html
-        # rvecs -> rotation matrix as calculated by solve PnP, or Rx * Ry * Rz
-        # T -> converted translation matrix, reference from site, vectors pulled from tvecs of solvPnP
-        # mtx -> 3d to 2d matrix
-        #customTransformMat = mtx * (T * (rvecs * A1))
-        #first = np.dot(rvecs, A1)
-        #second = np.dot(T, first)
-        #finalCalc = np.dot(mtx, second)
-        #finalNorm = finalCalc/(finalCalc[2,2])
-        #finalPT = np.dot(finalNorm,ptMatrix)
-        #finalPTNorm = finalPT/(finalPT[2,2])
-        #print finalPTNorm
         transMuffin = cv2.warpPerspective(npGameFrame, ptMatrix, (640, 480), None, cv2.INTER_NEAREST, cv2.BORDER_CONSTANT,  0)
 
-        
-        #print 'new mat'
-        #print rodRotMat
-        # I want to put logo on top-left corner, So I create a ROI
+        # This is a bit of hack, but adds in the warped game frame by threshing and masking black (see that rhymed)
         rows,cols,channels = transMuffin.shape
         roi = frameLeft[0:rows, 0:cols]
-
-        # Now create a mask of logo and create its inverse mask also
         transMuffingray = cv2.cvtColor(transMuffin,cv2.COLOR_BGR2GRAY)
         ret, mask = cv2.threshold(transMuffingray, 10, 255, cv2.THRESH_BINARY)
         mask_inv = cv2.bitwise_not(mask)
-
-        # Now black-out the area of logo in ROI
         frameLeft_bg = cv2.bitwise_and(roi,roi,mask = mask_inv)
-
-        # Take only region of logo from logo image.
         transMuffin_fg = cv2.bitwise_and(transMuffin,transMuffin,mask = mask)
-
-        # Put logo in ROI and modify the main image
         dst = cv2.add(frameLeft_bg,transMuffin_fg)
         frameLeft[0:rows, 0:cols ] = dst
         frameLeft = cv2.cvtColor(frameLeft,cv2.COLOR_RGB2BGR)
@@ -282,6 +232,7 @@ def transformTheSurface(inputFrame):
     else:
         print 'cant find corners'
 
+# test classes, maybe they can help you
 class threadPerspectiveRender (threading.Thread):
     def __init__(self, threadID, inputFrame):
         threading.Thread.__init__(self)
@@ -290,7 +241,8 @@ class threadPerspectiveRender (threading.Thread):
     def run(self):
         transformTheSurface(self.inputFrame)
         isDisplayed = True
-        
+      
+# test classes, maybe they can help you  
 def justTransform(inputFrame):
     print 'just transform'
     npGameFrame = pygame.surfarray.array3d(inputFrame)
