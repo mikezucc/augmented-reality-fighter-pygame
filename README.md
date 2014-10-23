@@ -19,4 +19,6 @@ from3dTransMatrix -> points of the projected 3d structure into 2d points. these 
 q -> this is the reference plane that we determine the pose from
 ptMatrix -> the final transformation, to transform the game frame to fit in the projected frame
 
+Check out the screens in the topmost folder ;]
+
 enjoy!
