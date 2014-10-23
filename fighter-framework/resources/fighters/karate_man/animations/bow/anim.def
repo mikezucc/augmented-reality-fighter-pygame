@@ -1,0 +1,8 @@
+[frame 10]
+file = "bow.png"
+axis = 30,46
+ttl = 120
+hold = true
+dmg box1 = 0,0,13,10	# head
+dmg box2 = 9,11,28,18	# mid
+dmg box3 = 17,19,30,46	# legs

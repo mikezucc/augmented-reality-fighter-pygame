@@ -1,0 +1,29 @@
+[frame 10]
+file = "10.png"
+ttl = 110
+axis = 28,67
+move = 17,0
+
+[frame 20]
+file = "20.png"
+ttl = 110
+axis = 24,86
+move = 17,0
+
+[frame 30]
+file = "30.png"
+ttl = 110
+axis = 28,92
+move = 17,0
+
+[frame 40]
+file = "40.png"
+ttl = 110
+axis = 35,72
+move = 17,0
+
+[frame 50]
+file = "50.png"
+ttl = 110
+axis = 29,50
+move = 17,0

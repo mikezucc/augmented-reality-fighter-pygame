@@ -1,0 +1,175 @@
+all code and documents related to this game are
+copyright 2010, 2011 Leif Theden
+========================================================================
+09/1/2011
+some significant changes to the engine and some bug fixes.
+added some comments in the code, in case you are interested.  i usually
+work on this once or twice a month, so i need to keep it documented
+for myself!
+
+new stuff:
+
+* state driver is more consistent, so game will not crash after 3 rounds
+* hit boxes can be read as overlays on each frame: no hardcoding hitboxes!
+* framerate locked at 40fps
+* timing is more accurate and consistent
+* sounds are more accurate
+* moved all the game py files to a library folder
+* tweaked ai and split blocking and attacking
+
+unfortunately, a couple bugs were introduced!
+a new bug is that some frames on the 2nd player are still red, when
+they should be white.  not sure how it got messed up!
+
+projectiles will not be added, that was a joke.
+
+01/4/2010
+using a new class callback timer more often.  simplifies many timed
+events, but also makes it harder to control the order they are executed.
+in the future, the world could have a list dedicated to updating timers.
+when a timer is added to the que, it will be added last, so that updates
+are happen in a logical order (enforce this).
+
+ai, fighter, and autoblacker class all share a lot of code...working to 
+unify them.  =)
+
+9/15/10
+fixed some ai problems.
+refactored the avatar class to limit memory usage.
+added some options to cache sprites.
+added a game state system, so control flow of game better
+added a menu (not in use)
+fixed hit confirms
+new rendering system
+added experimental "zoom" rendering system
+various issus with objects not beeing garbage collected
+	- on this point, wek refs would be nice if i could figure how to
+	use them properly.  =)
+
+because i'm using [potentially] copyrighted images, i've started a new
+	fighter based on actual footage of a fighter.  high framerate so
+	it looks smooth, and could potentially slow action for dramatic
+	effect!
+
+fixed some issues with keys not being registered
+
+6/25/10
+ideas:
+	turn based...start 2 seconds per turn, decide the move
+	as round continues, input time decreases
+	"a good fight is like a game of chess"
+		every move should have a clear counter part/block or evade like RPS
+
+
+	v cpu.  like a fight sequence in a kung fu movie:
+		same pattern every time.  master it thru repitition
+	end of fight should be played back at full speed, for dramatic effect
+	taunts?
+
+	music or drums to keep rhythm
+
+
+	memory usage:
+	frames can be cached if the rects are managed by the avatar.
+	currently, the avatar just gets that information from the frame
+
+
+6/24/10
+ton of changes!
+smarter collision handling
+block/whiff confirms (they look blue)
+ai works great!
+auto block for human players (66% chance to block)
+matches have rounds (3 by default)
+players fall when hit
+cleared some memory issues
+3 modes:
+	player vs cpu    (press f1)
+	player vs player (press f2)
+	cpu vs cpu       (press f3)
+
+ai:
+difficulty is 0 - 100
+ai can evade attacks
+ai doesn't have fsa, so does crazy cancels (a bug)
+
+removed flips.  cpu is too cheap with them.
+
+go ahead and try it!  playable!
+
+
+6/23/10
+cleaned up input some.  move should "feel" more responsive.
+cpu fighter will now block every move.
+---a hit confirm is still shown, just for kicks
+hit boxes are more generic and properly linked to parents
+
+
+6/22/10
+autoblocking, almost
+misc. fixes with looping frames
+
+
+6/20/10
+for pygame website
+There really is no name for this thing.  I would have used "pyfighter", but it
+was already taken.  =)
+
+Currently, only the controls are implemented.  No health bars, rounds, menus,
+etc.  Want to do that?  =)
+
+I want this incarnation to play something like the orginal "International
+Karate", but with a few modern embellishments, like combos, blocking, and
+more than two players and/or more cpu players.
+
+What works:
+Attack Holds (see below)
+Fluid controls with combos
+Cancels (smooth transition between animations)
+Player movement left, right, jumping, crouching
+Hit detection, with glitz
+Loading characters/fighters
+Sounds on hits and misses (ripped from enter the dragon, like IK)
+Recording input for playback later
+
+Obvious bugs:
+Walking animations are really ugly
+Missing a turn animation
+Walking past the other player causes a glitch in movement.
+Hitboxes need tweaking
+"Hit Confirms" do not appear where a hit occurs
+Hitting different kicks at once sometimes cancels out of crouch
+Animations are slower than input.  You don't see every hit.
+pygame event handling eats ton of cpu
+
+physics don't really have a place in this engine.  sprite movement and "physics"
+are handled by the animation, not the engine.  this is deliberate, b/c i want
+total control over how the sprites move and react.
+
+proposed system:
+
+move the get keys to a loop that gets called on a set freq,
+maybe 15hz, which is twice of the update freq for avatars
+
+atacking fighters should have sprites moved forward to front
+
+
+== B U G S =====================================================================
+b/c avatar updates are scheduled as part of animation frames,
+there is no way of canceling a move quickly if the frame as a long ttl
+
+possible speed improvement is "behind the scenes", conversion of animation
+names to base 2 numbers, giving way to masking like in buttons.  would allow
+for groups/wildcards in a non-cpu intensive manner.
+ok for now/not important
+
+cannot cancel combos into combos.
+easy fix: check end of move history instead of the hash lookup
+
+animation defs do not need to be listed one-after-another...can be "sparse"...
+but, internally, the numbers don't mean anything, so yeah.
+
+================================================================================
+dont forget:
+	images loaded in animations are expected to be in the animation folder
+	sounds loaded in animations are expected to be the the sounds folder

@@ -1,0 +1,10 @@
+[frame 10]
+file = "10.png"
+axis = 30,51
+ttl = 30
+hold = true
+dmg box1 = 12,31,38,36	# upper legs
+dmg box4 = 7,37,43,43	# lower legs
+dmg box5 = 0,44,47,51	# feet
+block box = 7,0,37,18
+

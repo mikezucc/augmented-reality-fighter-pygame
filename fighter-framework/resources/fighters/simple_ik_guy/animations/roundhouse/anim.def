@@ -1,0 +1,44 @@
+[frame 10]
+file = "10.png"
+axis = 22,51
+ttl = 90
+dmg box1 = 17,0,28,11	# head
+dmg box2 = 8,12,41,23	# arms
+dmg box3 = 9,24,31,37	# lower legs
+dmg box4 = 0,38,31,51	# lower legs
+
+[frame 20]
+file = "20.png"
+axis = 10,47
+ttl = 90
+
+[frame 30]
+file = "30.png"
+axis = 32,47
+ttl = 70
+
+[frame 40]
+file = "40.png"
+axis = 32,47
+ttl = 70
+
+[frame 50]
+file = "50.png"
+axis = 41,44
+ttl = 150
+hold = true
+miss sound = "miss1.wav"
+hit sound = "slap1.wav"
+hit box = 0,0,8,4
+hit spawn = "hit confirm"
+block spawn = "block confirm"
+
+[frame 60]
+file = "60.png"
+axis = 22,48
+ttl = 50
+
+[frame 70]
+file = "70.png"
+axis = 19,49
+ttl = 50

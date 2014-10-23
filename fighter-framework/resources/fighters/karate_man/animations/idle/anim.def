@@ -1,0 +1,13 @@
+[general]
+transparency = colorkey
+
+[frame 10]
+file = "10.png"
+axis = 22,58
+ttl = -1
+dmg box1 = 20,0,33,10	# head
+dmg box2 = 0,11,41,23	# arm
+dmg box3 = 13,24,40,35	# chest
+dmg box4 = 7,36,45,44	# legs
+dmg box5 = 0,45,47,50	# feet
+

@@ -1,0 +1,8 @@
+[frame 10]
+file = "10.png"
+axis = 26,35
+ttl = 60
+hold = true
+dmg box1 = 17,0,32,10
+dmg box2 = 7,11,39,24
+dmg box3 = 0,25,41,35

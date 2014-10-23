@@ -1,0 +1,20 @@
+[frame 10]
+file = "10.png"
+axis = 25,56
+ttl = 100
+
+[frame 20]
+file = "20.png"
+axis = 25,41
+ttl = 100
+
+[frame 30]
+file = "30.png"
+axis = 25,24
+ttl = 100
+
+[frame 40]
+file = "40.png"
+axis = 25,14
+ttl = -1
+sound = "fall3.wav"

@@ -1,0 +1,13 @@
+[general]
+pause = false
+
+[frame 10]
+file = "10.png"
+axis = 36,50
+ttl = 80
+move = -5,0
+dmg box1 = 3,40,46,50
+dmg box2 = 13,30,42,39
+dmg box3 = 0,10,41,21	# arm
+dmg box4 = 19,0,32,10	# head
+

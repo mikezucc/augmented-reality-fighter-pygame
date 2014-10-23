@@ -1,0 +1,15 @@
+[frame 10]
+file = "sweep.png"
+axis = 51,27
+ttl = 100
+hold = true
+hit box = 0,23,11,27
+miss sound = "miss1.wav"
+hit sound = "slap1.wav"
+hit spawn = "hit confirm"
+block spawn = "block confirm"
+dmg box1 = 44,0,56,9	# head
+dmg box2 = 36,10,71,27	# mid
+dmg box3 = 19,18,71,27	# lower
+dmg box4 = 12,20,22,27  # end of leg
+dmg box5 = 23,17,36,26	# start of leg

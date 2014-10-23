@@ -1,0 +1,51 @@
+[general]
+file prefix = "frame"
+transparency = colorkey
+ttl = 1
+
+[frame 2 - 4]
+file prefix = "frame0"
+axis = 11,58
+
+[frame 5 - 9]
+file prefix = "frame0"
+axis = 12,58
+
+[frame 10 - 11]
+axis = 13,58
+
+[frame 12 - 16]
+axis = 15,58
+
+[frame 17]
+file = "frame17"
+axis = 20,58
+dmg box3 = 19,0,34,11
+dmg box1 = 11,11,36,24
+dmg box2 = 16,25,26,49
+block box = 2,24,15,39
+
+[frame 18 - 22]
+axis = 23,60
+
+[frame 23]
+axis = 27, 60
+
+[frame 24]
+axis = 35, 60
+
+[frame 25]
+file = "frame25"
+axis = 35,60
+hold = true
+miss sound = "miss2.wav"
+hit sound = "slap1.wav"
+hit box = 0,0,10,5
+hit spawn = "hit confirm"
+block spawn = "block confirm"
+
+[frame 26 - 28]
+axis = 34,58
+
+[frame 29 - 38]
+axis = 30,58

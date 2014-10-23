@@ -1,0 +1,56 @@
+[animation]
+hold loop = true
+hold play = true
+
+[frame 10]
+file = "10.png"
+axis = 36,50
+ttl = 120
+move = -5,0
+dmg box1 = 19,0,32,10	# head
+dmg box2 = 0,10,41,21	# arm
+dmg box3 = 17,22,36,39
+dmg box4 = 13,40,46,50
+
+
+[frame 20]
+file = "20.png"
+axis = 36,50
+ttl = 120
+move = -5,0
+dmg box1 = 3,40,46,50
+dmg box2 = 13,30,42,39
+dmg box3 = 0,10,41,21	# arm
+dmg box4 = 19,0,32,10	# head
+
+
+[frame 30]
+file = "30.png"
+axis = 43,50
+ttl = 120
+move = -5,0
+dmg box1 = 3,40,46,50
+dmg box2 = 13,30,42,39
+dmg box3 = 0,10,41,21	# arm
+dmg box4 = 19,0,32,10	# head
+
+[frame 40]
+file = "40.png"
+axis = 42,50
+ttl = 120
+move = -5,0
+dmg box 1 = 8,36,44,50	# lower leg
+dmg box 2 = 15,22,40,35	# upper leg
+dmg box 3 = 0,10,41,21	# arm
+dmg box 4 = 19,0,32,10	# head
+
+
+[frame 50]
+file = "50.png"
+axis = 32,50
+ttl = 120
+move = -5,0
+dmg box1 = 15,40,37,50	# lower legs
+dmg box2 = 12,33,35,39	# mid legs	(there is a gap in the chest)
+dmg box3 = 0,11,41,24	# arm
+dmg box4 = 19,0,32,10	# head

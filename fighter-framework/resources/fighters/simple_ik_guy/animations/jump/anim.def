@@ -1,0 +1,35 @@
+[general]
+pause = false
+
+[frame 10]
+file = "10.png"
+axis = 24,48
+ttl = 100
+move = -1,0
+dmg box1 = 9,0,23,10
+dmg box2 = 10,11,35,23
+dmg box3 = 0,24,29,30
+dmg box4 = 4,31,24,43
+dmg box5 = 3,44,30,48
+
+[frame 20]
+file = "20.png"
+axis = 25,61
+ttl = 120
+move = -4,0
+dmg box1 = 23,0,38,12
+dmg box2 = 0,13,45,19
+dmg box3 = 8,20,45,29
+dmg box4 = 14,28,35,35
+
+[frame 30]
+file = "10.png"
+axis = 24,48
+ttl = 100
+move = -4,0
+dmg box1 = 9,0,23,10
+dmg box2 = 10,11,35,23
+dmg box3 = 0,24,29,30
+dmg box4 = 4,31,24,43
+dmg box5 = 3,44,30,48
+

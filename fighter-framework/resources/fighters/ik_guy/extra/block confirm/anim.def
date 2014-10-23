@@ -1,0 +1,29 @@
+[frame 10]
+file = "10.png"
+axis = center
+ttl = 20
+
+[frame 20]
+file = "20.png"
+axis = center
+ttl = 20
+
+[frame 30]
+file = "30.png"
+axis = center
+ttl = 30
+
+[frame 40]
+file = "40.png"
+axis = center
+ttl = 35
+
+[frame 50]
+file = "50.png"
+axis = center
+ttl = 55
+
+[frame 60]
+file = "60.png"
+axis = center
+ttl = 115
