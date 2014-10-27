@@ -19,6 +19,16 @@ from3dTransMatrix -> points of the projected 3d structure into 2d points. these 
 q -> this is the reference plane that we determine the pose from
 ptMatrix -> the final transformation, to transform the game frame to fit in the projected frame
 
+#How to setup:
+
+Set up OpenCV 3.0.0 alpha
+1. Follow the instructions from the website, but generally you need install a whole suite of libraries like numpy 1.9 and scipy. There was not a straight forward out of the box for me. As of time of edit, the opencv.org site seems to be down (the docs are still up)
+
+Initial configuration for this code
+
+1.  Run the singleRecorder.py to capture around 18-22 frames of the checkerboard in various poses with as little blur or fuzziness as possible. Use the 'c' key to capture a frame you want.
+2.  Run the cameraCalib function in appDev.py to obtain the intrinsic camera parameters and distortion data which is stored as calibDataMTX.npy and calibDataDIST.npy. These you need to import to the fighter-framework directory and the lib directory.
+
 Check out the screens in the topmost folder ;]
 
 enjoy!
