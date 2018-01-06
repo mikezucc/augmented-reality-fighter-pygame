@@ -1,6 +1,8 @@
 augmented-reality-fighter-pygame
 ================================
 
+![screen1](https://github.com/mikezucc/augmented-reality-fighter-pygame/blob/master/screen1.JPG)
+
 https://www.youtube.com/watch?v=b8PMgRdXlZE
 
 https://www.youtube.com/watch?v=s-IiAD5H5YU
