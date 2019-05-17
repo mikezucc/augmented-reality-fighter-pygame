@@ -17,7 +17,7 @@ My code opens a thread everytime a new surface (PyGame for frame simply) is call
 1. Searches a camera stream frame for the 5x4 chessboard (cv2.findChessboardCorners)
 2. The found corners are then drawn onto the image
 3. Using cv2.solvePnP, the approximate pose (Rotation and translation vectors) are derived
-4. The 3d points that describe a square are then projected from the 3d space determined by step 3 into a 2d space. this is used to convert a predertimined 3d structure into something you can use to graph on a 2d image.
+4. The 3d points that describe a square are then projected from the 3d space determined by step 3 into a 2d space. this is used to convert a predetermined 3d structure into something you can use to graph on a 2d image.
 5. However, this step instead finds the transformation to get from a set of 2d square points (the dimensions of the game frame) to the newly found projected 2d points (of the 3d frame). Now you can see that what we are trying to is simply do a two step transformation.
 6. I then perform a basic tutorial style addition of the captured stream frame and the transformed game frame to get a final image
 
